@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Public Journal</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="hero">
+    <h1>Public Journal</h1>
+    <p>Tuliskan ceritamu, bacalah kisah mereka. Tanpa nama, tanpa penilaian.</p>
+    <p>by Arya Dwiki Buana Paksi 22.11.4976</p>
+    <button onclick="document.getElementById('form').scrollIntoView({behavior: 'smooth'})">Tulis Cerita</button>
+  </header>
+
+  <section class="entries">
+    <h2>Cerita Terbaru</h2>
+    <div id="journal-entries" class="cards">
+    </div>
+  </section>
+
+  <section id="form" class="form-section">
+    <h2>Tulis Ceritamu</h2>
+    <form id="storyForm">
+      <textarea placeholder="Ceritakan sesuatu..." required></textarea>
+      <button type="submit">Bagikan</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Public Journal</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
