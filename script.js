@@ -131,31 +131,41 @@ async function loadWeather() {
         
     } catch (error) {
         console.error("Gagal memuat cuaca:", error);
-        weatherInfo.innerHTML = '<div class="weather-error">' + 
-            (currentLanguage === 'id' ? 'Tidak dapat memuat data cuaca' : 'Unable to load weather data') + 
-            '</div>';
+        
+        
+        try {
+            const fallbackResponse = await axios.get(
+                `https://api.weatherapi.com/v1/current.json?key=${CONFIG.WEATHER_API_KEY}&q=Jakarta&lang=${currentLanguage}`
+            );
+            displayWeather(fallbackResponse.data);
+        } catch (fallbackError) {
+            console.error("Juga gagal dengan fallback:", fallbackError);
+            displayWeatherError();
+        }
     }
 }
 
-
+// Tampilkan data cuaca yang disederhanakan
 function displayWeather(weather) {
+    const temp = Math.round(weather.current.temp_c);
+    const location = weather.location.name;
+    const condition = weather.current.condition.text;
+    
     const weatherHTML = `
         <div class="weather-info">
-            <div class="weather-location">${weather.location.name}, ${weather.location.country}</div>
-            <div class="weather-temp">${Math.round(weather.current.temp_c)}°C</div>
-            <div class="weather-condition">
-                <img src="https:${weather.current.condition.icon}" alt="${weather.current.condition.text}">
-                ${weather.current.condition.text}
+            <div class="weather-main">
+                <div class="weather-temp">${temp}°C</div>
+                <div class="weather-location">${location}</div>
             </div>
+            <div class="weather-condition">${condition}</div>
             <div class="weather-time">
-                ${currentLanguage === 'id' ? 'Terakhir update:' : 'Last updated:'} ${new Date(weather.current.last_updated).toLocaleTimeString()}
+                ${currentLanguage === 'id' ? 'Update:' : 'Updated:'} ${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}
             </div>
         </div>
     `;
     
     weatherInfo.innerHTML = weatherHTML;
 }
-
 
 function setupEventListeners() {
 
