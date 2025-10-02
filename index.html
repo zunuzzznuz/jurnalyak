@@ -1,48 +1,83 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>JurnalYak</title>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9CK33EYW0"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-J9CK33EYW0');
-  </script>
-
-  <link rel="stylesheet" href="style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Journey - Catatan Perjalanan Anda</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  <header class="hero">
-    <h1>JurnalYak</h1>
-    <p>Tuliskan ceritamu, bacalah kisah mereka. Tanpa nama, tanpa penilaian.</p>
-    <p>by Arya Dwiki Buana Paksi 22.11.4943</p>
-    <button onclick="document.getElementById('form').scrollIntoView({behavior: 'smooth'})">Tulis Cerita</button>
-  </header>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo" data-en="Travel Journey" data-id="Catatan Perjalanan">Catatan Perjalanan</h1>
+            <button id="languageToggle" class="language-toggle">
+                <span class="lang-text" data-en="ID" data-id="EN">EN</span>
+            </button>
+        </div>
+    </header>
 
-  <section class="entries">
-    <h2>Cerita Terbaru</h2>
-    <div id="journal-entries" class="cards">
-    </div>
-  </section>
+    <section class="hero">
+        <div class="hero-content">
+            <h2 data-en="Share Your Travel Stories" data-id="Bagikan Cerita Perjalanan Anda">Bagikan Cerita Perjalanan Anda</h2>
+            <p data-en="Document your adventures and explore the world" data-id="Dokumentasikan petualangan Anda dan jelajahi dunia">
+                Dokumentasikan petualangan Anda dan jelajahi dunia
+            </p>
+        </div>
+    </section>
 
-  <section id="form" class="form-section">
-    <h2>Tulis Ceritamu</h2>
-    <form id="storyForm">
-      <textarea placeholder="Ceritakan sesuatu..." required></textarea>
-      <button type="submit">Bagikan</button>
-    </form>
-  </section>
+    <section class="weather-section">
+        <div class="container">
+            <h3 data-en="Current Weather" data-id="Cuaca Saat Ini">Cuaca Saat Ini</h3>
+            <div id="weatherInfo" class="weather-card">
+                <div class="weather-loading" data-en="Loading weather..." data-id="Memuat cuaca...">Memuat cuaca...</div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 jurnalyak</p>
-  </footer>
+    <section class="form-section">
+        <div class="container">
+            <h3 data-en="Add New Journey" data-id="Tambah Perjalanan Baru">Tambah Perjalanan Baru</h3>
+            <form id="journeyForm" class="journey-form">
+                <div class="form-group">
+                    <label data-en="Destination" data-id="Destinasi">Destinasi</label>
+                    <input type="text" id="destination" required>
+                </div>
+                <div class="form-group">
+                    <label data-en="Travel Date" data-id="Tanggal Perjalanan">Tanggal Perjalanan</label>
+                    <input type="date" id="travelDate" required>
+                </div>
+                <div class="form-group">
+                    <label data-en="Your Story" data-id="Cerita Anda">Cerita Anda</label>
+                    <textarea id="story" placeholder="" required></textarea>
+                    <small class="placeholder-text" data-en="Share your travel experience..." data-id="Bagikan pengalaman perjalanan Anda...">
+                        Bagikan pengalaman perjalanan Anda...
+                    </small>
+                </div>
+                <button type="submit" data-en="Add Journey" data-id="Tambah Perjalanan">Tambah Perjalanan</button>
+            </form>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
+    <section class="entries">
+        <div class="container">
+            <h3 data-en="My Travel Journeys" data-id="Perjalanan Saya">Perjalanan Saya</h3>
+            <div id="journey-entries" class="cards">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p data-en="Made with ❤️ for travelers around the world" data-id="Dibuat dengan ❤️ untuk para traveler di seluruh dunia">
+                Dibuat dengan ❤️ untuk para traveler di seluruh dunia
+            </p>
+            <p class="location-info" data-en="Your journey starts here" data-id="Perjalanan Anda dimulai di sini">
+                Perjalanan Anda dimulai di sini
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
