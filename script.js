@@ -167,6 +167,20 @@ function displayWeather(weather) {
     weatherInfo.innerHTML = weatherHTML;
 }
 
+function displayWeatherError() {
+    const weatherHTML = `
+        <div class="weather-info">
+            <div class="weather-main">
+                <div class="weather-temp">--°C</div>
+                <div class="weather-location">${currentLanguage === 'id' ? 'Lokasi tidak diketahui' : 'Location unknown'}</div>
+            </div>
+            <div class="weather-condition">${currentLanguage === 'id' ? 'Data tidak tersedia' : 'Data unavailable'}</div>
+        </div>
+    `;
+    
+    weatherInfo.innerHTML = weatherHTML;
+}
+
 function setupEventListeners() {
 
     languageToggle.addEventListener('click', toggleLanguage);
