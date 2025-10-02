@@ -1,14 +1,4 @@
-const CONFIG = {
-    TELEGRAM_BOT_TOKEN: '7968687607:AAGrh4Q3QsQ5KD8dzrMsPiC8W0FtvjiSntw',
-    TELEGRAM_CHAT_ID: '1254913051',
-    WEATHER_API_KEY: '0714e2d6c51447dfa37102719252904'
-};
-
-let currentLanguage = 'id';
-let userLocation = {};
-
-const languageToggle = document.getElementById('languageToggle');
-const langText = document.querySelector('.lang-text');
+faeufeufia
 const weatherInfo = document.getElementById('weatherInfo');
 const journeyForm = document.getElementById('journeyForm');
 const entriesContainer = document.getElementById('journey-entries');
