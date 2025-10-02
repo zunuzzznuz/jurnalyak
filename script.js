@@ -127,22 +127,25 @@ async function loadWeather() {
         );
         
         const weather = response.data;
-        
-
-        userLocation.city = weather.location.name;
-        userLocation.country = weather.location.country;
-        
-        console.log('Cuaca untuk:', weather.location.name); // Debug
         displayWeather(weather);
-        updateLocationDisplay();
         
     } catch (error) {
         console.error("Gagal memuat cuaca:", error);
-        displayWeatherError();
+        
+        
+        try {
+            const fallbackResponse = await axios.get(
+                `https://api.weatherapi.com/v1/current.json?key=${CONFIG.WEATHER_API_KEY}&q=Jakarta&lang=${currentLanguage}`
+            );
+            displayWeather(fallbackResponse.data);
+        } catch (fallbackError) {
+            console.error("Juga gagal dengan fallback:", fallbackError);
+            displayWeatherError();
+        }
     }
 }
 
-
+// Tampilkan data cuaca yang disederhanakan
 function displayWeather(weather) {
     const temp = Math.round(weather.current.temp_c);
     const location = weather.location.name;
@@ -162,9 +165,6 @@ function displayWeather(weather) {
     `;
     
     weatherInfo.innerHTML = weatherHTML;
-    
-
-        updateLocationDisplay();
 }
 
 function displayWeatherError() {
