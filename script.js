@@ -145,7 +145,6 @@ async function loadWeather() {
     }
 }
 
-// Tampilkan data cuaca yang disederhanakan
 function displayWeather(weather) {
     const temp = Math.round(weather.current.temp_c);
     const location = weather.location.name;
